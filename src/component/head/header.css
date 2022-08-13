@@ -1,0 +1,106 @@
+@import "~antd/dist/antd.css";
+:root {
+  --DeepColor: #948c76;
+  --BrightColor: #fdf4e8;
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  border-bottom: 1px solid gray;
+}
+
+.header-form {
+  width: 300px;
+}
+
+.header-form-input {
+  border: 2px solid #7ba7ab;
+  border-radius: 5px;
+  font-size: 1em;
+  background: #f9f0da;
+  color: #9e9c9c;
+}
+
+.header-form-button {
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 1em;
+  background: #7ba7ab;
+}
+
+.header-content {
+  margin-left: 3%;
+  width: 80%;
+  color: var(--DeepColor);
+  background: white;
+  font-size: 1em;
+}
+
+.header_option {
+  position: absolute;
+  right: 5%;
+  font-size: 1em;
+  color: black;
+}
+
+.header_button {
+  color: black;
+  background: none;
+  border-radius: 5%;
+  border: none;
+}
+
+.header_button:hover,
+header_button:active {
+  color: #d3131c;
+  background: grey;
+}
+
+.my-sort a {
+  display: inline-block;
+  margin: 0 1em;
+  font-size: 0.8em;
+}
+
+.my-sort a:hover,
+my-sort a:active {
+  color: #d3131c;
+  text-decoration: underline;
+}
+
+.header_more {
+  position: absolute;
+  width: 7.5%;
+  right: 5%;
+  font-size: 0.5em;
+  color: black;
+  border: 1px solid grey;
+  border-radius: 5%;
+  background: white;
+  margin-top: 4em;
+}
+
+.header_more_link {
+  font-size: 0.5em;
+}
+.header_ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 1em;
+}
+
+/* // 动画 */
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-5em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

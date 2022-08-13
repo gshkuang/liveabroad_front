@@ -1,0 +1,50 @@
+
+
+@import '~antd/dist/antd.css';
+:root {
+--DeepColor: #948C76;
+--BrightColor: #fdf4e8;
+}
+
+
+.header-box{
+	  display:flex;
+	  flex-direction: column;
+	  float:left;
+    animation: fadein .3s;
+  }
+  
+  .header-box img {
+	  
+      width: 40vw;
+      height: 40vw;
+      max-width: 120px;
+      max-height: 120px;
+      border-radius: 50%;
+}
+
+  .my-id {
+	  bottom: 0px;
+   max-width: 120px;
+    font-size: 1.3em;
+    font-weight: 400;
+    padding: 0 0;
+    letter-spacing: .1em;
+    line-height: 2em;
+    margin: 0 1em;
+    display: inline-block;
+    color: var(--DeepColor);
+    background: var(--BrightColor);
+  }
+
+
+  @keyframes fadein{
+  from{
+    opacity: 0;
+    transform: translateY(-5em);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0)
+  }
+} 
