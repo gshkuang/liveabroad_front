@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  margin: auto;
+  left:0;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.navbar-items {
+  position: absolute;
+  display: flex;
+  font-weight: bold;
+  float: right;
+  /* z-index: 1; */
+  flex-direction: column;
+  top:0;
+  padding-right:2%;
+}

@@ -3,7 +3,7 @@
 }
 .Artical-box {
   padding-left: 0%;
-  margin-top: 2em;
+  margin-top: 0.1em;
 }
 .Artical-box .artical {
   width: 100%;
@@ -29,7 +29,7 @@
 .Artical-box .date {
   display: block;
   top: -0.5em;
-  margin-left: 3.5em;
+  margin-left: 2.5em;
   height: 2.14em;
   color: #948c76;
   z-index: 10;
@@ -55,13 +55,13 @@
 }
 .Artical-box .art-container {
   width: 100%;
-  padding: 0 0 0 1%;
+  padding: 0 0 0 0%;
   position: relative;
 }
 .Artical-box .art-container .line {
   width: 0.143em;
   height: 100%;
-  background: #f7f3ee;
+  background: #34322f;
   position: absolute;
   z-index: 0;
   transition: 0.5s;
@@ -70,6 +70,8 @@
   padding: 0 1em 1em 2em;
   overflow: hidden;
   text-align: left;
+  /* border-bottom: 1px solid gray; */
+  box-shadow: 0px 0px 2px #999;
 }
 .Artical-box .art-container .art-title {
   margin: 0 0 0;
@@ -106,10 +108,15 @@
 .Artical-box .art-container .art-detail_more {
   width: 100%;
   line-height: 1.5em;
+  
   margin-top: 0.5em;
   font-size: 0.5em;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+
+  /* text-align: right; */
 }
+
 @media screen and (max-width: 450px) {
   .Artical-box {
     padding-left: 5%;

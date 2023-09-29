@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,forwardRef } from "react";
 import { Link, Route } from "react-router-dom";
-import { Icon } from "antd";
 import myAvator from "./header.jpg";
 import "./header.css";
 import DirectionsRunOutlined from "@mui/icons-material/DirectionsRunOutlined";
 
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 
-const Header = () => {
+const Header = (props,ref) => {
   const [display, setDisplay] = useState(false);
   const [more, setMore] = useState(false);
 
@@ -45,24 +44,31 @@ const Header = () => {
   return (
     <div>
       <div className="header">
-        {/* <div className="header-box fadein"><img src={myAvator} alt="我的头像" /><p className="my-id">作者名字</p></div> */}
-        {/* todo 中间 */}
-        {/* <div><p className="my-id">作者名字</p></div>   */}
         <DirectionsRunOutlined />
-        <div>举头</div>
 
-        <div className="header-content">
+
+        <ul className="header_nav">
+        <li> <a href="/">首页</a></li>
+        <li><a href="/">资讯</a></li>
+        <li><a href="/">会议</a></li>
+        <li><a href="/">工具</a></li>
+        <li><a href="/">教程</a></li>
+        <li><a href="/">论文</a></li>
+        </ul>
+
+    
           <form className="header-form">
             <input
               className="header-form-input"
               type="text"
               placeholder="输入关键词搜索..."
+              // ref={ref}
             />
             <button className="header-form-button" type="submit">
               <SearchOutlined />
             </button>
           </form>
-        </div>
+    
 
         <div className="header_option">
           <button
@@ -89,4 +95,5 @@ const Header = () => {
   );
 };
 
-export default Header;
+let ForwardRefHeader=forwardRef(Header)
+export default ForwardRefHeader;

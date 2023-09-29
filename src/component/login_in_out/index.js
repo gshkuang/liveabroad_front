@@ -3,9 +3,7 @@ import {
   Form,
   Input,
   Select,
-  Checkbox,
 	Button,
-      Tabs,
 } from 'antd';
 
 const { Option } = Select;

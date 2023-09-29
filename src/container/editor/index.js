@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Radio, BackTop } from "antd";
 import Header from "../../component/head";
 import "./index.css";
-import { getcontent_artical, save_content_artical } from "../../api/api";
+import { get_resource, save_resource } from "../../api/api";
 import TextColorControl from "./color_control";
 
 import {
@@ -78,7 +78,7 @@ function DraftEditor() {
     if (blogInfo.content == null || blogInfo.content.length <= 0) {
       return;
     }
-    save_content_artical(blogInfo).then((val) => {
+    save_resource(blogInfo).then((val) => {
       console.log(val);
     });
   };

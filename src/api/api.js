@@ -65,47 +65,25 @@ export function logout_api() {
       })
   })
 }
-// 添加文章
-export function add_artical({
-  content,
-  title,
-  createtime,
-  desc
-}) {
-  return new Promise((resolve, reject) => {
-    axios.post('/api/article/v1/upsert', {
-        content,
-        title,
-        createtime,
-        desc
-      })
-      .then(res => {
-        res.status === 200  ? resolve(res.data.data) : resolve(false)
-      })
-      .catch(err => {
-        resolve(false)
-      })
-  })
-}
 
-// 文章列表
-export function list_artical({
+// 资源列表
+export function list_resource({
 	biz_id ,
 author_id,
   page = 0,
   size
 }) {
   return new Promise((resolve, reject) => {
-    axios.get('/api/article/v1/list',{
+    axios.get('/api/resources/recommend',{
         params: {
-         	biz_id: biz_id,
+      biz_id: biz_id,
 			page_size: size,
 			author_id:author_id,
-			page_num:page
+			page_no:page
         },
       })
 		.then(res => {
-			console.log(res.data)
+
         const {
           data,
           count,
@@ -124,12 +102,45 @@ author_id,
   });
 }
 
-// 文章详情
-export function save_content_artical(blogInfo) {
+
+// 资源列表
+export function search_resource({
+  param,
+  page = 0,
+}) {
+  return new Promise((resolve, reject) => {
+    axios.post('/api/resources/search',{
+      title: param.title,
+      tags: param.tags,
+      start_create_at: param.start_create_at,
+      end_create_at: param.end_create_at,
+			page_no:page
+      })
+		.then(res => {
+        const {
+          data,
+          count,
+		} = res.data;
+         res.status === 200? resolve({
+          data,
+          count
+        }) : resolve({
+          data: [],
+          count: 0
+        })
+      })
+      .catch(err => {
+        reject({})
+      })
+  });
+}
+
+// 资源详情
+export function save_resource(blogInfo) {
   return new Promise((resolve, reject) => {
     axios
       .post(
-        "/api/article/v1/upsert",
+        "/api/save_resource",
         { data: blogInfo },
         { headers: { "Content-Type": "application/json" } }
       )
@@ -143,14 +154,27 @@ export function save_content_artical(blogInfo) {
   });
 }
 
-// 文章详情
-export function getcontent_artical(_id) {
+// 资源详情
+export function get_resource(_id) {
   return new Promise((resolve, reject) => {
-    axios.get('/api/article/v1/get',{
+    axios.get('/api/get_resource',{
         params: {
           id: _id,
         },
       })
+		.then(res => {
+			res.status === 200 ? resolve(res.data.data) : resolve({})
+      })
+      .catch(err => {
+        reject({})
+      })
+  });
+}
+
+// 获取详情
+export function get_resource_tags() {
+  return new Promise((resolve, reject) => {
+    axios.get('/api/resource/get_tags',{})
 		.then(res => {
 			res.status === 200 ? resolve(res.data.data) : resolve({})
       })
@@ -180,12 +204,12 @@ export function getinfo() {
 // 评论
 export function sendComment({
   content,
-  replyId
+  associated_id
 }) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/comment/v1/upsert', {
+    axios.post('/api/save_comment', {
         content,
-        replyId,
+        associated_id,
         ip: window.userip,
         city: window.usercity
       })
@@ -202,13 +226,11 @@ export function sendComment({
 export function getComments({
 	id,
   page,
-  size
 }) {
   return new Promise((resolve, reject) => {
-    axios.get('/api/comment/v1/get', {
+    axios.get('/api/get_comments', {
         params: {
 			id: id,
-			page_size: size,
 			page_num:page
         },
       }).then(res => {
@@ -236,7 +258,7 @@ export function getComments({
 // 删除留言
 export function delComments(fId, id) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/comment/delete', {
+    axios.post('/api/delete_comment', {
         fId,
         id
       })

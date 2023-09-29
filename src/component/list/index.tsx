@@ -1,89 +1,78 @@
-import React, { PureComponent } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { getlist, clearlist } from "../../reducer/artical.redux.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getlist } from "../../reducer/resource.redux.js";
 import { Skeleton, Button } from "antd";
 import "./list.css";
+import moment from "moment";
 
-interface Props {
-  artical: any;
-  getlist: Function;
-  clearlist: Function;
-}
-interface State {
-  size: number;
-}
-// @ts-ignore
-@connect((state) => state, { getlist, clearlist })
-class List extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      size: 15,
-    };
-    this.getMore = this.getMore.bind(this);
-  }
+const List = (props) => {
 
-  async componentDidMount() {
-    const { size } = this.state;
-    const { getlist } = this.props;
+  const size = 10
+  const dipatch = useDispatch();
+  // @ts-ignore
+  const resource = useSelector((state) => state.resource);
+  useEffect(() => {
+    const { param } = props;
+    console.log("new:"+param)
+    // @ts-ignore
+    dipatch(getlist({ biz_id: 0, param: param, page: 0, size: size }));
+  }, [])//props.title,props.tags
 
-    console.log(this.props);
-    size != 0 ? await getlist({ biz_id: 0, page: 0, size: size }) : null;
-  }
+  function getMore() {
 
-  async getMore() {
-    const { size } = this.state;
-    const { getlist } = this.props;
-    const { page } = this.props.artical;
+    const { param } = props;
+    const { page } = resource;
     const nextpage = page + 1;
-    await getlist({ biz_id: 0, page: nextpage, size: size }); //todo
+    // @ts-ignore
+    dipatch(getlist({ biz_id: 0, param: param, page: nextpage })); //todo
   }
-  render() {
-    const { artical } = this.props;
-    const { list, count } = artical;
-    console.log(artical);
-    const loadmore = (
-      <div style={{ textAlign: "center" }}>
-        <Button onClick={this.getMore}>加载更多</Button>
-      </div>
-    );
 
-    const listhtml = (
-      <div>
-        {list
-          .filter((v: any) => v.title.length > 0)
-          .map((v: any) => (
+  const { list, count } = resource;
+  const loadmore = (
+    <div style={{ textAlign: "right" }}>
+      <Button onClick={getMore}>加载更多</Button>
+    </div>
+  );
+
+  const listhtml = (
+    <div className="list">
+      {list
+        // .filter((v: any) => v.content.length > 0)
+        .map((v: any) => (
+          <div className="Artical-box">
             <div className="artical" key={v.id}>
               {/* <div className="dotts"></div> */}
               <div className="art-container">
-                <div className="line"></div>
+                {/* <div className="line"></div> */}
                 <div className="art-content">
                   <p className="art-title">
-                    <Link to={`/blog/${v.id}`}>{v.title}</Link>
+                    <img src="logo192.png" width="30" height="30" />
+                    <Link to={`${v.url}`}>{v.title}</Link>
                   </p>
                   <div className="art-detail">
-                    <p>{v.content}</p>
+                    <p>{v.intro}</p>
                     {/* <p className="date">{timestampToTime(v.create_at)}</p> */}
                   </div>
+
                   <div className="art-detail_more">
-                    评论：{v.review_info.review_num} 点赞：
-                    {v.review_info.approve_num}
-                    {timestampToTime(v.create_at)}
+                    <div > 标签:{v.tag}</div>
+                    <div>  发布时间:{moment(v.publish_at * 1000).format("YYYY-MM-DD")}  </div>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
-        {list.length >= this.state.size ? loadmore : null}
-      </div>
-    );
-    const none = <Skeleton active />;
-    return (
-      <div className="Artical-box">{list.length === 0 ? none : listhtml}</div>
-    );
-  }
-}
+          </div>
+        ))}
+      {list.length >= size ? loadmore : <div>没有更多了</div>}
+    </div>
+  );
+
+  const none = <Skeleton active />;
+  return (
+    <div className="Artical-box">{list.length === 0 ? none : listhtml}</div>
+  );
+};
 
 function timestampToTime(timestamp: any) {
   if (timestamp == null || timestamp <= 0) {

@@ -1,7 +1,6 @@
 import React from "react";
 import Home from "../container/home";
 import Editor from "../container/editor";
-import GraphEditor from "../container/graph";
 import Comments from "../container/comments";
 import UserCenter from "../container/user_center";
 
@@ -12,6 +11,10 @@ const routers = [
   },
   {
     path: "/home",
+    component: <Home />,
+  },
+  {
+    path: "/search",
     component: <Home />,
   },
   {
@@ -34,9 +37,9 @@ const routers = [
     path: "/blog/get/:id",
     component: <Editor />,
   },
-  {
-    path: "/graph",
-    component: <GraphEditor />,
-  },
+  // {
+  //   path: "/graph",
+  //   component: <GraphEditor />,
+  // },
 ];
 export { routers };

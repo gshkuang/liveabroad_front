@@ -5,12 +5,10 @@ import {
     Row,
     Card,
     Col,
-    Upload,
     Modal,
-	Icon,
 } from 'antd';
 import Header from "../../component/head";
-import RegistrationForm from "../../component/login_in_out";
+// import RegistrationForm from "../../component/login_in_out";
 import myAvator from './header.jpg';
 import './user_center.css';
 
@@ -95,7 +93,7 @@ class UserCenter extends React.Component {
                     </Col>
 					</Row>
 					</div>
-					<RegistrationForm/>
+					{/* <RegistrationForm/> */}
 
 			    </div>
     );

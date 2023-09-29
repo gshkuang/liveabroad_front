@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { artical } from './artical.redux';
+import { resource } from './resource.redux';
 import { comment } from './comment.redux';
 
-export default combineReducers({ artical,comment});
+export default combineReducers({ resource,comment});

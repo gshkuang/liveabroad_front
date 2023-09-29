@@ -10,8 +10,6 @@ const initState = {
 export function comment(state = initState, action){
   switch(action.type){
 	  case GETCOMMENT:
-		  console.log(action)
-		  console.log(state)
       const { page } = action.payload;
       const list =  page === 0 ? [] : state.list;
       const { list: newlist, ...others} = action.payload;
