@@ -7,26 +7,11 @@ import "./list.css";
 import moment from "moment";
 
 const List = (props) => {
-
-  const size = 10
+  const { param } = props;
   const dipatch = useDispatch();
   // @ts-ignore
   const resource = useSelector((state) => state.resource);
-  useEffect(() => {
-    const { param } = props;
-    console.log("new:"+param)
-    // @ts-ignore
-    dipatch(getlist({ biz_id: 0, param: param, page: 0, size: size }));
-  }, [])//props.title,props.tags
-
-  function getMore() {
-
-    const { param } = props;
-    const { page } = resource;
-    const nextpage = page + 1;
-    // @ts-ignore
-    dipatch(getlist({ biz_id: 0, param: param, page: nextpage })); //todo
-  }
+  const size = 10
 
   const { list, count } = resource;
   const loadmore = (
@@ -34,6 +19,21 @@ const List = (props) => {
       <Button onClick={getMore}>加载更多</Button>
     </div>
   );
+
+
+  useEffect(() => {
+    // @ts-ignore
+    dipatch(getlist({ biz_id: 0, param: param, page: 0, size: size }));
+  }, [param])//
+
+  function getMore() {
+    const { param } = props;
+    const { page } = resource;
+    const nextpage = page + 1;
+    // @ts-ignore
+    dipatch(getlist({ biz_id: 0, param: param, page: nextpage })); //todo
+  }
+
 
   const listhtml = (
     <div className="list">

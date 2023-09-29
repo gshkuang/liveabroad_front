@@ -16,7 +16,7 @@ const Home = (props) => {
   const resource = useSelector((state) => state.resource);
   // 获取 dipatch 方法
   const dipatch = useDispatch();
-  const ref=useRef()
+  const ref=useRef(null)
 
   const [resourceState, setResourceState] = useState({'tags':new Set(),'title':""});
 
@@ -36,6 +36,7 @@ const Home = (props) => {
       'title':resourceState.title,
     }
    )
+
     return () => {
       // 存储页面滚动位置
       const top =
@@ -47,6 +48,15 @@ const Home = (props) => {
           setCount(count*2)
     };
   }, [])
+
+  const handSearchClick = (inputValue) => {
+    const newState ={
+      'tags':resourceState.tags,
+      'title':inputValue
+    }
+    setResourceState(newState)
+    console.log(resourceState)
+  };
 
   function onChange(e,value) {
     const isChecked = e.target.checked;
@@ -67,7 +77,7 @@ const Home = (props) => {
 
   return (
     <div>
-      <ForwardRefHeader ></ForwardRefHeader>
+      <ForwardRefHeader handSearchClick={handSearchClick} ref={ref} ></ForwardRefHeader>
       <BackTop />
       <div className="navbar">
         <div className="navbar-items">
@@ -81,6 +91,8 @@ const Home = (props) => {
           <List param={resourceState} />
         </div>
       </div>
+
+      
     </div>
   );
 };

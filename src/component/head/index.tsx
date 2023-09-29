@@ -1,6 +1,5 @@
-import React, { useState, useEffect,forwardRef } from "react";
+import React, { useState, useEffect,forwardRef,useRef } from "react";
 import { Link, Route } from "react-router-dom";
-import myAvator from "./header.jpg";
 import "./header.css";
 import DirectionsRunOutlined from "@mui/icons-material/DirectionsRunOutlined";
 
@@ -10,10 +9,33 @@ const Header = (props,ref) => {
   const [display, setDisplay] = useState(false);
   const [more, setMore] = useState(false);
 
+  const handleButtonClick = () => {
+    //@ts-ignore
+    const inputValue = ref.current.value;
+    console.log(inputValue);
+   const {handSearchClick}= props
+    handSearchClick(inputValue);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // 阻止表单的默认提交行为
+      //@ts-ignore
+      const inputValue = ref.current.value;
+     const {handSearchClick}= props
+      handSearchClick(inputValue);
+  };
+
+    //   // 暴露给父组件的属性
+    //   useImperativeHandle(onRef, () => ({
+    //     isShow,
+    //     setIsShow
+    // }));
+
   //监听窗口事件及初始化数据
   useEffect(() => {
     //DidMount;
-
+    const inputValue = ref.current.value;
+    console.log(inputValue);
     //监听
     //定义handleScroll事件函数
     const handleScroll = (e: any) => {
@@ -57,14 +79,15 @@ const Header = (props,ref) => {
         </ul>
 
     
-          <form className="header-form">
+          <form className="header-form" onSubmit={handleSubmit}>
             <input
               className="header-form-input"
               type="text"
-              placeholder="输入关键词搜索..."
-              // ref={ref}
+              //@ts-ignore
+              // placeholder={}
+              ref={ref}
             />
-            <button className="header-form-button" type="submit">
+            <button className="header-form-button" type="submit" >
               <SearchOutlined />
             </button>
           </form>

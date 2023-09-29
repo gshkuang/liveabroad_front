@@ -1,11 +1,15 @@
 .navbar {
   display: flex;
   align-items: center;
-  position: fixed;
-  margin: auto;
+  /* position: fixed; */
+  /* margin: auto; */
   left:0;
   width: 100%;
+  padding-top: topx;
   justify-content: flex-end;
+  /* height:calc(100vh - 50px); */
+  /* overflow: scroll; */
+  /* z-index: 9999; */
 }
 
 .navbar-items {
@@ -15,6 +19,6 @@
   float: right;
   /* z-index: 1; */
   flex-direction: column;
-  top:0;
+  top:50px;
   padding-right:2%;
 }
